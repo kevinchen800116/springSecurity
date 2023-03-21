@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!--thymeleaf模板支持-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/3.2.1/jquery.serializejson.min.js" integrity="sha512-SdWDXwOhhVS/wWMRlwz3wZu3O5e4lm2/vKK3oD0E5slvGFg/swCYyZmts7+6si8WeJYIUsTrT3KZWWCknSopjg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"  th:href="@{/fonts/Linearicons-Free-v1.0.0/icon-font.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css"  th:href="@{/vendor/css-hamburgers/hamburgers.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"  th:href="@{/vendor/animsition/css/animsition.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"  th:href="@{/vendor/select2/select2.min.css}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css"  th:href="@{/vendor/daterangepicker/daterangepicker.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"  th:href="@{/css/util.css}">
+	<link rel="stylesheet" type="text/css"  th:href="@{/css/main.css}">
+<!--===============================================================================================-->
+</head>
+<body>
+<div>
+   <!-- 显示由控制器传递过来的实体user的值-->
+   <div class="limiter">
+    <div class="container-login100" style="background-image: url('/images/bg-01.jpg');">
+        <div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+            <span class="login100-form-title p-b-53">
+                <h2>新增學生會員</h2>
+            </span>
+            <form class="login100-form validate-form flex-sb flex-w" id="form1" th:action="@{/api/v1/student/add}" th:object="${empty}" method="POST">
+                <div class="p-t-31 p-b-9">
+                    <span class="txt1">
+                        <label for="name">姓名:</label>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate = "Username is required">
+                    <input class="input100" id="name" name="name" type="text" th:field="*{name}"/>
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="p-t-31 p-b-9">
+                    <span class="txt1">
+                        <label for="email">電子郵件:</label>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate = "email is required">
+                    <input class="input100" id="email" name="email" type="text" th:field="*{email}"/>
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="p-t-31 p-b-9">
+                    <span class="txt1">
+                        <label for="age">年齡:</label>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate = "age is required">
+                    <input class="input100" id="age" name="age" type="text" th:field="*{age}"/>
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 ">
+                    <button type="submit" class="login100-form-btn">
+                        新增
+                    </button>
+                </div>
+            </form>
+            <span class="login100-form-title p-b-53">
+                <button class="login100-form-btn">
+                    <a href="/">返回</a>
+                </button>
+            </span>
+
+            <ul class="p-t-13 p-b-9" th:each="student: ${user}">
+
+                <li>
+                    <span>姓名:</span>
+                    <span th:text="${student.name}"></span>
+                </li>
+                <li>
+                    <span class="txt1">電子郵件:</span>
+                    <span th:text="${student.email}"></span>
+                </li>
+                <li>
+                    <span class="txt1">年齡:</span>
+                    <span th:text="${student.age}"></span>
+                </li>
+                <button class="login100-form-btn" th:onclick="Update([[${student.email}]]);">更新</button>
+                <button  class="login100-form-btn" th:onclick="deleteID([[${student.email}]]);">刪除</button>
+            </ul>
+
+        </div>
+    </div>
+</div>
+<!--===============================================================================================-->
+    <script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/select2/select2.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
+	<script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/countdowntime/countdowntime.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/js/main.js}"></script>
+<script>
+    function add(){
+        //console.log("目前表單沒有用ajax delete有")
+        var datas = $("#form1").serializeJSON();
+        //console.log(datas)
+        $.ajax({
+            url:"add",
+            type:"post",
+            data:JSON.stringify({datas}),
+            contentType:"application/json;charset=UTF-8",
+            success: function(data){
+                alert("請求成功!")
+            },
+            error: function(){
+                alert("請求失敗!")
+            }
+        })
+    }
+    function deleteID(email){
+        console.log(email);
+        $.ajax({
+            url:"del",
+            type:"delete",
+            data:email,
+            contentType:"application/json;charset=UTF-8",
+            success: function(data){
+                alert("刪除成功!")
+                location.reload();
+            },
+            error: function(){
+                alert("請求失敗!")
+            }
+        })
+    }
+    function Update(email){
+        console.log("更新");
+        $.ajax({
+            url:"update"+"/"+email,
+            type:"GET",
+            data:"",
+            contentType:"application/json;charset=UTF-8",
+            success: function(data){
+                console.log("進入更新頁面成功!")
+                // ajax跳轉網址
+                window.location.href="/api/v1/student/update/"+email;
+            },
+            error: function(){
+                alert("請求失敗!")
+            }
+        })
+    }
+
+</script>
+
+<style>
+    a{
+        text-decoration: none;
+        color:white;
+    }
+ </style>
+ </body>
+</html>

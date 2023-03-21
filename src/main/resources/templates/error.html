@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--thymeleaf模板支持-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/3.2.1/jquery.serializejson.min.js" integrity="sha512-SdWDXwOhhVS/wWMRlwz3wZu3O5e4lm2/vKK3oD0E5slvGFg/swCYyZmts7+6si8WeJYIUsTrT3KZWWCknSopjg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css" th:href="@{vendor/bootstrap/css/bootstrap.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css" th:href="@{fonts/Linearicons-Free-v1.0.0/icon-font.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css" th:href="@{vendor/animate/animate.css}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css" th:href="@{vendor/css-hamburgers/hamburgers.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css" th:href="@{vendor/animsition/css/animsition.min.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css" th:href="@{vendor/select2/select2.min.css}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css" th:href="@{vendor/daterangepicker/daterangepicker.css}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css" th:href="@{css/util.css}">
+	<link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{css/main.css}">
+<!--===============================================================================================-->
+
+</head>
+<body>
+<div>
+   <!-- 显示由控制器传递过来的实体user的值-->
+   <div class="limiter">
+		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+				<h1>有錯誤</h1>
+				<p th:text="${errorSomething}"></p>
+				<div class="p-t-13 p-b-9">
+					<span class="txt1">
+						<button  type="submit" class="login100-form-btn">
+							<a href="/">返回</a>
+						</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+ </body>
+ <!--===============================================================================================-->
+ <script src="vendor/jquery/jquery-3.2.1.min.js" th:src="@{vendor/jquery/jquery-3.2.1.min.js}"></script>
+ <!--===============================================================================================-->
+	 <script src="vendor/animsition/js/animsition.min.js" th:src="@{vendor/animsition/js/animsition.min.js}"></script>
+ <!--===============================================================================================-->
+	 <script src="vendor/bootstrap/js/popper.js" th:src="@{vendor/bootstrap/js/popper.js}"></script>
+	 <script src="vendor/bootstrap/js/bootstrap.min.js" th:src="@{vendor/bootstrap/js/bootstrap.min.js}"></script>
+ <!--===============================================================================================-->
+	 <script src="vendor/select2/select2.min.js" th:src="@{vendor/select2/select2.min.js}"></script>
+ <!--===============================================================================================-->
+	 <script src="vendor/daterangepicker/moment.min.js" th:src="@{vendor/daterangepicker/moment.min.js}"></script>
+	 <script src="vendor/daterangepicker/daterangepicker.js" th:src="@{vendor/daterangepicker/daterangepicker.js}"></script>
+ <!--===============================================================================================-->
+	 <script src="vendor/countdowntime/countdowntime.js" th:src="@{vendor/countdowntime/countdowntime.js}"></script>
+ <!--===============================================================================================-->
+	 <script src="js/main.js" th:src="@{js/main.js}"></script>
+	 <style>
+		h1{
+			text-align: center;
+			color:white;
+		}
+	 </style>
+</html>

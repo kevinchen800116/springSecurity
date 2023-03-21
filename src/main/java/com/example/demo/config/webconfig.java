@@ -1,0 +1,21 @@
+package com.example.demo.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class webconfig implements WebMvcConfigurer{
+
+    // @Override
+    // public void addViewControllers(ViewControllerRegistry registry) {
+    //     // 自訂義登入後之畫面
+    //     registry.addViewController("/?home").setViewName("index");
+    // }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**")
+        .addResourceLocations("/resources/");
+    }
+}
+
