@@ -58,6 +58,7 @@ public class SecurityConfig {
                 .requestMatchers("/images/**").permitAll()
                 .requestMatchers("/js/**").permitAll()
                 .requestMatchers("/bootstrap/**").permitAll()
+                .requestMatchers("/webjars/**").permitAll()
                 .anyRequest().authenticated());
         return http.build();
     }

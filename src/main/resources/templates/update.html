@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/3.2.1/jquery.serializejson.min.js" integrity="sha512-SdWDXwOhhVS/wWMRlwz3wZu3O5e4lm2/vKK3oD0E5slvGFg/swCYyZmts7+6si8WeJYIUsTrT3KZWWCknSopjg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!--===============================================================================================-->
+    <!--===============================================================================================-->
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
 <!--===============================================================================================-->
@@ -63,7 +64,7 @@
                                     <span class="focus-input100"></span>
                                 </div>
                                 <div class="wrap-input100 ">
-                                    <button class="login100-form-btn" th:onclick="update([[${student.email}]])">
+                                    <button  type="button" class="login100-form-btn" onclick="update()">
                                         提交
                                     </button>
                                 </div>
@@ -78,8 +79,36 @@
     </div>
 </div>
 <script>
-    function update(){
+    function update() {
         var datas = $("#form1").serializeJSON();
+        console.log(datas)
+        fetch('/api/v1/student/updateStudent', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datas),
+        }).then(function(response) {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log('請求更新成功')
+            alert("更新成功!!")
+            //location.reload();
+            //console.log('请求更新成功')
+            //return response.json();
+        }).catch(function(error) {
+            console.log('There has been a problem with your fetch operation:', error.message);
+        });
+    }
+      
+      // 调用 update 函数时，等待其完成后再重新加载页面
+      //update().then(function() {
+        //location.reload();
+      //});
+    /* function update(){
+        var datas = $("#form1").serializeJSON();
+        console.log("準備更新")
 
         fetch('/api/v1/student/updateStudent', {
             method: 'PUT',
@@ -90,10 +119,11 @@
             }).then(function(response) {
                 console.log('請求更新成功')
                 alert("更新成功!!")
+                // 在請求成功後進行頁面跳轉
+                window.location.href = '/api/v1/student/update/' + datas.email;
         })
-        //location.reload();
-        //window.location.assign("/api/v1/student/add");
     }
+    */
 </script>
  </body>
  <style>

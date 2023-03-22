@@ -2,8 +2,6 @@ package com.example.demo.controller;
 
 import java.util.List;
 import java.util.Map;
-
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,11 +10,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.entity.student;
 import com.example.demo.service.studentService;
+
 
 
 @RestController
@@ -88,24 +88,38 @@ public class studentController {
     }
 
     @PutMapping("/updateStudent")
-    public void updateStudent(@RequestBody Map<String ,String>student) {
-        System.out.println("put測試");
-        System.out.println(student);
-        String Name=student.get("name");
-        String Email=student.get("email");
-        int Age=Integer.valueOf(student.get("age")).intValue();
-
-        studentService.update(Name,Age,Email);
+    @ResponseBody
+    public void updateStudent(@RequestBody Map<String, String> student) {
+        try {
+            System.out.println("put測試");
+            System.out.println(student);
+            String name = student.get("name");
+            String email = student.get("email");
+            int age = Integer.parseInt(student.get("age"));
+            if (name != null && email != null) {
+                studentService.update(name, age, email);
+            } else {
+                // 如果name或email為null，則不執行更新操作
+                throw new IllegalArgumentException("name或email為null");
+            }
+        } catch (NumberFormatException e) {
+            // 如果age轉換失敗，則不執行更新操作
+            throw new IllegalArgumentException("age轉換失敗");
+        } catch (Exception e) {
+            // 处理其他异常，可以记录日志或者给出提示信息等
+            e.printStackTrace();
+        }
     }
 
-    // @PostMapping("/post")
-    // public String AjaxRegisterNewStudent(@RequestBody String data){
-    //     System.out.println(data.getClass().getSimpleName());
-    //     System.out.println(data);
-        
-    //     // student newStudent=new student("kevin","email",12);
-    //     // studentService.addNewStudent(student);
-    //     return "成功";
+    // @PutMapping("/updateStudent")
+    // public  void updateStudent(@RequestBody Map<String ,String>student) {
+    //     System.out.println("put測試");
+    //     System.out.println(student);
+    //     String Name=student.get("name");
+    //     String Email=student.get("email");
+    //     int Age=Integer.valueOf(student.get("age")).intValue();
+
+    //     studentService.update(Name,Age,Email);
     // }
 
 }
